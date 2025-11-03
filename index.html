@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ร้านค้าสไตล์ญี่ปุ่น</title>
+    <title>AI Software Store - Professional Platform</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -12,180 +14,230 @@
         }
 
         body {
-            font-family: 'Noto Sans Thai', 'Noto Sans JP', sans-serif;
-            background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c4 100%);
+            font-family: 'Inter', 'Noto Sans Thai', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             min-height: 100vh;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(100, 200, 255, 0.5);
+            border-radius: 50%;
+            animation: float-particle 15s infinite;
+        }
+
+        @keyframes float-particle {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
         }
 
         .container {
+            position: relative;
             width: 100%;
-            max-width: 100%;
             height: 100vh;
-            max-height: calc(100vh - 20px);
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
             display: flex;
             flex-direction: column;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 255, 255, 0.05) 10px,
-                rgba(255, 255, 255, 0.05) 20px
-            );
-            animation: slide 20s linear infinite;
-        }
-
-        @keyframes slide {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        .header-content {
-            position: relative;
             z-index: 1;
         }
 
-        .logo {
-            font-size: clamp(1.5em, 5vw, 2.5em);
-            color: white;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin-bottom: 8px;
-            letter-spacing: 2px;
+        /* Modern Header */
+        .header {
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(100, 200, 255, 0.2);
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .subtitle {
-            color: #ffd700;
-            font-size: clamp(0.9em, 3vw, 1.2em);
-            letter-spacing: 1px;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .decorative-wave {
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(102, 126, 234, 0.8);
+            }
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: clamp(1.1em, 3vw, 1.4em);
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            font-size: clamp(0.7em, 2vw, 0.85em);
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 400;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #10b981;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism effect */
+        .content-wrapper::before {
+            content: '';
             position: absolute;
-            bottom: -2px;
+            top: 0;
             left: 0;
-            width: 100%;
-            height: 20px;
-            background: white;
-            clip-path: polygon(
-                0 50%, 10% 30%, 20% 40%, 30% 20%, 40% 35%, 
-                50% 25%, 60% 40%, 70% 20%, 80% 35%, 90% 30%, 100% 50%, 
-                100% 100%, 0 100%
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(100, 200, 255, 0.5), 
+                transparent
             );
         }
 
-        .main-content {
+        .iframe-frame {
             flex: 1;
-            padding: 15px;
             position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .frame-wrapper {
-            position: relative;
-            background: #f8f8f8;
             border-radius: 12px;
-            padding: 15px;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
             overflow: hidden;
+            background: white;
+            box-shadow: 
+                0 0 0 1px rgba(100, 200, 255, 0.2),
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
-        .frame-decoration {
+        /* Loading Animation */
+        .loading-container {
             position: absolute;
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #c41e3a, #8b0000);
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d2d44 100%);
             z-index: 10;
         }
 
-        .frame-decoration.top-left {
-            top: -8px;
-            left: -8px;
-        }
-
-        .frame-decoration.top-right {
-            top: -8px;
-            right: -8px;
-            transform: rotate(90deg);
-        }
-
-        .frame-decoration.bottom-left {
-            bottom: -8px;
-            left: -8px;
-            transform: rotate(270deg);
-        }
-
-        .frame-decoration.bottom-right {
-            bottom: -8px;
-            right: -8px;
-            transform: rotate(180deg);
-        }
-
-        .iframe-container {
-            flex: 1;
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            background: white;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-
-        .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #666;
-            font-size: clamp(1em, 3vw, 1.2em);
-            z-index: 5;
-        }
-
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #c41e3a;
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(100, 200, 255, 0.1);
+            border-top: 3px solid #667eea;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 20px auto;
         }
 
         @keyframes spin {
@@ -193,190 +245,215 @@
             100% { transform: rotate(360deg); }
         }
 
+        .loading-text {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .loading-subtext {
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85em;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            background: white;
+        }
+
+        /* Info Bar */
+        .info-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 12px 20px;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-icon {
+            font-size: 1.2em;
+        }
+
+        /* Footer */
         .footer {
-            background: #2c2c2c;
-            color: white;
-            text-align: center;
-            padding: 12px;
-            font-size: clamp(0.75em, 2.5vw, 0.9em);
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(100, 200, 255, 0.2);
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             flex-shrink: 0;
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.6);
         }
 
-        .footer-ornament {
-            display: inline-block;
-            margin: 0 8px;
-            color: #c41e3a;
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .sakura {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: clamp(1.2em, 4vw, 2em);
-            opacity: 0.3;
-            animation: float 6s ease-in-out infinite;
-            z-index: 1;
+        .footer-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(10deg); }
+        .footer-link:hover {
+            color: #667eea;
         }
 
-        /* Desktop styles */
-        @media (min-width: 1024px) {
-            body {
-                padding: 20px;
-            }
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-            .container {
-                max-width: 1400px;
-                border-radius: 20px;
-            }
-
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .header {
-                padding: 30px;
+                padding: 12px 15px;
+            }
+
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            .status-indicator {
+                padding: 6px 12px;
+                font-size: 0.75em;
             }
 
             .main-content {
-                padding: 30px;
+                padding: 15px;
             }
 
-            .frame-wrapper {
-                padding: 20px;
+            .content-wrapper {
+                padding: 15px;
                 border-radius: 15px;
             }
 
-            .frame-decoration {
-                width: 40px;
-                height: 40px;
-            }
-
-            .frame-decoration.top-left {
-                top: -10px;
-                left: -10px;
-            }
-
-            .frame-decoration.top-right {
-                top: -10px;
-                right: -10px;
-            }
-
-            .frame-decoration.bottom-left {
-                bottom: -10px;
-                left: -10px;
-            }
-
-            .frame-decoration.bottom-right {
-                bottom: -10px;
-                right: -10px;
+            .info-bar {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+                padding: 10px 15px;
             }
 
             .footer {
-                padding: 20px;
+                flex-direction: column;
+                gap: 10px;
+                padding: 12px 15px;
+                text-align: center;
+            }
+
+            .footer-left {
+                flex-direction: column;
+                gap: 8px;
             }
         }
 
-        /* Tablet styles */
-        @media (min-width: 768px) and (max-width: 1023px) {
-            body {
-                padding: 15px;
-            }
-
-            .header {
-                padding: 25px;
-            }
-
-            .main-content {
-                padding: 20px;
-            }
-        }
-
-        /* Mobile landscape */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .header {
-                padding: 10px;
-            }
-
-            .logo {
-                margin-bottom: 5px;
-            }
-
-            .decorative-wave {
-                height: 15px;
-            }
-
-            .main-content {
-                padding: 10px;
-            }
-
-            .sakura {
+        @media (max-width: 480px) {
+            .header-right .status-indicator span {
                 display: none;
             }
 
-            .footer {
-                padding: 8px;
+            .logo-subtitle {
+                display: none;
+            }
+
+            .info-bar {
+                font-size: 0.8em;
             }
         }
 
-        /* Very small screens */
-        @media (max-width: 360px) {
-            body {
-                padding: 5px;
-            }
-
-            .container {
-                border-radius: 10px;
-            }
-
+        /* Small landscape screens */
+        @media (max-height: 500px) and (orientation: landscape) {
             .header {
-                padding: 15px;
+                padding: 8px 20px;
             }
 
             .main-content {
                 padding: 10px;
             }
 
-            .frame-wrapper {
+            .content-wrapper {
                 padding: 10px;
             }
 
-            .frame-decoration {
-                width: 25px;
-                height: 25px;
+            .info-bar {
+                padding: 8px 15px;
+                margin-bottom: 10px;
             }
-        }
 
-        /* Hide decorations on very small screens to save space */
-        @media (max-width: 480px) {
-            .sakura {
-                font-size: 1.5em;
+            .footer {
+                padding: 8px 20px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="particles" id="particles"></div>
+
     <div class="container">
+        <!-- Header -->
         <div class="header">
-            <div class="header-content">
-                <div class="logo">🏮 日本の店 🏮</div>
-                <div class="subtitle">ยินดีต้อนรับสู่ร้านค้าสไตล์ญี่ปุ่น</div>
+            <div class="header-left">
+                <div class="logo-container">
+                    <div class="logo-icon">🤖</div>
+                    <div class="logo-text">
+                        <div class="logo-title">AI Software Store</div>
+                        <div class="logo-subtitle">Professional Platform</div>
+                    </div>
+                </div>
             </div>
-            <div class="decorative-wave"></div>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>Online</span>
+                </div>
+            </div>
         </div>
 
+        <!-- Main Content -->
         <div class="main-content">
-            <span class="sakura">🌸</span>
-            <div class="frame-wrapper">
-                <div class="frame-decoration top-left"></div>
-                <div class="frame-decoration top-right"></div>
-                <div class="frame-decoration bottom-left"></div>
-                <div class="frame-decoration bottom-right"></div>
-                
-                <div class="iframe-container">
-                    <div id="loading" class="loading">
-                        <div class="spinner"></div>
-                        <p>กำลังโหลด...</p>
+            <div class="content-wrapper">
+                <div class="info-bar">
+                    <div class="info-item">
+                        <span class="info-icon">⚡</span>
+                        <span>Powered by AI Technology</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🔒</span>
+                        <span>Secure Transaction</span>
+                    </div>
+                </div>
+
+                <div class="iframe-frame">
+                    <div id="loading" class="loading-container">
+                        <div class="loading-spinner"></div>
+                        <div class="loading-text">กำลังโหลดระบบ...</div>
+                        <div class="loading-subtext">โปรดรอสักครู่</div>
                     </div>
                     
                     <iframe 
@@ -389,20 +466,57 @@
             </div>
         </div>
 
+        <!-- Footer -->
         <div class="footer">
-            <span class="footer-ornament">◆</span>
-            ออกแบบด้วยสไตล์ญี่ปุ่นแท้
-            <span class="footer-ornament">◆</span>
+            <div class="footer-left">
+                <span>© 2024 AI Software Store</span>
+                <span>•</span>
+                <a href="#" class="footer-link">เงื่อนไขการใช้งาน</a>
+                <span>•</span>
+                <a href="#" class="footer-link">นโยบายความเป็นส่วนตัว</a>
+            </div>
+            <div class="footer-right">
+                <span>⚡ Powered by Advanced AI</span>
+            </div>
         </div>
     </div>
 
     <script>
+        // Create animated particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Hide loading screen
         function hideLoading() {
             const loading = document.getElementById('loading');
             const iframe = document.getElementById('appFrame');
             
-            loading.style.display = 'none';
-            iframe.style.display = 'block';
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                loading.style.transition = 'opacity 0.5s ease';
+                
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                    iframe.style.display = 'block';
+                    iframe.style.opacity = '0';
+                    iframe.style.transition = 'opacity 0.5s ease';
+                    
+                    setTimeout(() => {
+                        iframe.style.opacity = '1';
+                    }, 50);
+                }, 500);
+            }, 300);
         }
 
         // Fallback if iframe doesn't trigger onload
@@ -412,7 +526,10 @@
             }
         }, 5000);
 
-        // Prevent zoom on double tap for mobile
+        // Initialize
+        createParticles();
+
+        // Prevent zoom on double tap
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function (event) {
             const now = (new Date()).getTime();
