@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ร้านค้าสไตล์ญี่ปุ่น</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans Thai', 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c4 100%);
+            min-height: 100vh;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            height: 100vh;
+            max-height: calc(100vh - 20px);
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b0000 100%);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.05) 10px,
+                rgba(255, 255, 255, 0.05) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: clamp(1.5em, 5vw, 2.5em);
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #ffd700;
+            font-size: clamp(0.9em, 3vw, 1.2em);
+            letter-spacing: 1px;
+        }
+
+        .decorative-wave {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: white;
+            clip-path: polygon(
+                0 50%, 10% 30%, 20% 40%, 30% 20%, 40% 35%, 
+                50% 25%, 60% 40%, 70% 20%, 80% 35%, 90% 30%, 100% 50%, 
+                100% 100%, 0 100%
+            );
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .frame-wrapper {
+            position: relative;
+            background: #f8f8f8;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .frame-decoration {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #c41e3a, #8b0000);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            z-index: 10;
+        }
+
+        .frame-decoration.top-left {
+            top: -8px;
+            left: -8px;
+        }
+
+        .frame-decoration.top-right {
+            top: -8px;
+            right: -8px;
+            transform: rotate(90deg);
+        }
+
+        .frame-decoration.bottom-left {
+            bottom: -8px;
+            left: -8px;
+            transform: rotate(270deg);
+        }
+
+        .frame-decoration.bottom-right {
+            bottom: -8px;
+            right: -8px;
+            transform: rotate(180deg);
+        }
+
+        .iframe-container {
+            flex: 1;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #666;
+            font-size: clamp(1em, 3vw, 1.2em);
+            z-index: 5;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #c41e3a;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            background: #2c2c2c;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: clamp(0.75em, 2.5vw, 0.9em);
+            flex-shrink: 0;
+        }
+
+        .footer-ornament {
+            display: inline-block;
+            margin: 0 8px;
+            color: #c41e3a;
+        }
+
+        .sakura {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: clamp(1.2em, 4vw, 2em);
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 1024px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                max-width: 1400px;
+                border-radius: 20px;
+            }
+
+            .header {
+                padding: 30px;
+            }
+
+            .main-content {
+                padding: 30px;
+            }
+
+            .frame-wrapper {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            .frame-decoration {
+                width: 40px;
+                height: 40px;
+            }
+
+            .frame-decoration.top-left {
+                top: -10px;
+                left: -10px;
+            }
+
+            .frame-decoration.top-right {
+                top: -10px;
+                right: -10px;
+            }
+
+            .frame-decoration.bottom-left {
+                bottom: -10px;
+                left: -10px;
+            }
+
+            .frame-decoration.bottom-right {
+                bottom: -10px;
+                right: -10px;
+            }
+
+            .footer {
+                padding: 20px;
+            }
+        }
+
+        /* Tablet styles */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            body {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 25px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+        }
+
+        /* Mobile landscape */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .header {
+                padding: 10px;
+            }
+
+            .logo {
+                margin-bottom: 5px;
+            }
+
+            .decorative-wave {
+                height: 15px;
+            }
+
+            .main-content {
+                padding: 10px;
+            }
+
+            .sakura {
+                display: none;
+            }
+
+            .footer {
+                padding: 8px;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 360px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .main-content {
+                padding: 10px;
+            }
+
+            .frame-wrapper {
+                padding: 10px;
+            }
+
+            .frame-decoration {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        /* Hide decorations on very small screens to save space */
+        @media (max-width: 480px) {
+            .sakura {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">🏮 日本の店 🏮</div>
+                <div class="subtitle">ยินดีต้อนรับสู่ร้านค้าสไตล์ญี่ปุ่น</div>
+            </div>
+            <div class="decorative-wave"></div>
+        </div>
+
+        <div class="main-content">
+            <span class="sakura">🌸</span>
+            <div class="frame-wrapper">
+                <div class="frame-decoration top-left"></div>
+                <div class="frame-decoration top-right"></div>
+                <div class="frame-decoration bottom-left"></div>
+                <div class="frame-decoration bottom-right"></div>
+                
+                <div class="iframe-container">
+                    <div id="loading" class="loading">
+                        <div class="spinner"></div>
+                        <p>กำลังโหลด...</p>
+                    </div>
+                    
+                    <iframe 
+                        id="appFrame"
+                        src="https://script.google.com/macros/s/AKfycbxHOSOlUdKKhUPdlo4cmUgOl2mEAV8tPUiZ2jQyC97OFIvYUxbZv0Bj5IvpXwZtNwRBQA/exec"
+                        style="display: none;"
+                        onload="hideLoading()"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="footer-ornament">◆</span>
+            ออกแบบด้วยสไตล์ญี่ปุ่นแท้
+            <span class="footer-ornament">◆</span>
+        </div>
+    </div>
+
+    <script>
+        function hideLoading() {
+            const loading = document.getElementById('loading');
+            const iframe = document.getElementById('appFrame');
+            
+            loading.style.display = 'none';
+            iframe.style.display = 'block';
+        }
+
+        // Fallback if iframe doesn't trigger onload
+        setTimeout(() => {
+            if (document.getElementById('loading').style.display !== 'none') {
+                hideLoading();
+            }
+        }, 5000);
+
+        // Prevent zoom on double tap for mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
